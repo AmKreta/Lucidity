@@ -10,6 +10,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import Grid from '@mui/material/Grid2';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import { InventoryGrid } from "../../components/inventoryGrid/inventoryGrid.component";
 
 export default function Dashboard(){
 
@@ -27,8 +28,6 @@ export default function Dashboard(){
         //dispatch(InventoryActions.fetchInventories() as any);
     },[]);
 
-    console.log(inventories);
-
     // if(inventoryErrorMessage){
     //     return <div>{inventoryErrorMessage}</div>
     // }
@@ -38,13 +37,14 @@ export default function Dashboard(){
     // }
 
 
-    return <Container maxWidth="lg" sx={{height:'100%', backgroundColor:'grey.900'}}>
-        <Typography variant="h3" color="grey.300" sx={{paddingTop:'16px'}}>Inventory Stats</Typography>
-        <Grid container spacing={2} alignItems="center" justifyContent="flex-start" py='16px'>
+    return <Container fixed sx={{height:'100%', minWidth:'100%', backgroundColor:'grey.900'}}>
+        <Typography variant="h3" color="grey.300" sx={{paddingTop:'48px'}}>Inventory Stats</Typography>
+        <Grid container spacing={2} alignItems="center" justifyContent="flex-start" my="32px">
             <DashboardCard title="Total products" Icon={ShoppingCartIcon} value={inventoryTotalProducts}/>
             <DashboardCard title="Total store value" Icon={CurrencyExchangeIcon} value={inventoryStoreValue}/>
             <DashboardCard title="Out of stock" Icon={RemoveShoppingCartIcon} value={inventoryTotalOutOfStock}/>
             <DashboardCard title="No of Categories" Icon={CategoryIcon} value={inventoryNumCategories}/>
         </Grid>
+        <InventoryGrid inventories={inventories}/>
     </Container>;
 }

@@ -1,0 +1,23 @@
+table.inventoryGrid{
+    width:100%;
+    border-collapse: collapse;
+    border-radius:8px;
+    overflow:hidden;
+
+    thead{
+
+    }
+
+    tbody{
+
+    }
+
+    tr, td, th{
+        padding:16px;
+        text-align:left
+    }
+}
+
+.grid-actions:hover{
+    cursor:pointer;
+}

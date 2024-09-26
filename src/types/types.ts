@@ -7,7 +7,7 @@ export enum INVENTORY_CATEGORIES{
 
 export type Currency<T extends string> = `${T}${string}`;
 
-export interface Iinventory<CURRENCY extends string = '$'>{
+export interface IInventory<CURRENCY extends string = '$'>{
     name: string;
     category: INVENTORY_CATEGORIES;
     value: Currency<CURRENCY>;

@@ -1,0 +1,8 @@
+.dashboard-card{
+    display: flex;
+    min-width: 200px;
+    padding: 16px;
+    gap: 16px;
+    flex-grow: 1;
+    border-radius: 16px;
+}

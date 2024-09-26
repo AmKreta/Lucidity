@@ -3,6 +3,7 @@ import logger from 'redux-logger';
 import inventoryStore from './inventory/inventory.store';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import userStore from './user/user.store';
 
 const persistConfig = {
     key: 'root',
@@ -10,7 +11,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-    inventory: inventoryStore
+    inventory: inventoryStore,
+    user: userStore
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

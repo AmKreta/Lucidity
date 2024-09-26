@@ -18,7 +18,7 @@ const initialState:IInventoryStore = {
 const fetchInventories = createAsyncThunk("[Inventory FetchInventories]", async (_, thunkApi:any) => {
    const inventoryService = new InventoryService();
    const inventories:any = await inventoryService.getInventory();
-   return inventories;
+   return await inventories.json();
 });
 
 export const postSlice = createSlice({
@@ -47,7 +47,7 @@ export const postSlice = createSlice({
     }
 });
 
-export const PostActions = {
+export const InventoryActions = {
     fetchInventories,
     ...postSlice.actions
 }

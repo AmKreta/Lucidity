@@ -10,5 +10,4 @@ const SERVICES = {
 
 export default function useService(serviceInjectionToken: SERVICE_INJECTION_TOKEN){
     return SERVICES[serviceInjectionToken];
-}   
-
+}

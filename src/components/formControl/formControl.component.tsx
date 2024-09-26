@@ -1,5 +1,7 @@
 import React from "react";
 import './formControl.styles.css';
+import { useTheme } from "@emotion/react";
+import { Typography } from "@mui/material";
 
 export interface IFormControl{
     label: string;
@@ -9,8 +11,10 @@ export interface IFormControl{
 }
 
 export const FormControl:React.FC<IFormControl> = function({label, value, onChange, id}){
+    const theme:any = useTheme();
+
     return <div className="form-control">
-        <label htmlFor={id}>{label}</label>
-        <input value={value} onChange={onChange} />
+        <Typography variant="body2" component={'label'} color="grey.300">{label}</Typography>
+        <input value={value} onChange={onChange} style={{backgroundColor: theme.palette.grey['700'], color:theme.palette.grey['300']}}/>
     </div>
 }

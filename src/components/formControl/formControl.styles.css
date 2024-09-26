@@ -1,0 +1,17 @@
+.form-control{
+    flex-grow:1;
+
+    label{
+        display:block;
+        margin-bottom:8px;
+    }
+
+    input{
+        background: transparent;
+        border-radius:8px;
+        border:none;
+        outline:none;
+        padding:8px;
+        width:100%;
+    }
+}   

@@ -1,0 +1,17 @@
+.inventory-editor-container{
+    position:absolute;
+    height:100vh;
+    width:100vw;
+    background-color:rgba(0,0,0,.4);
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    backdrop-filter: blur(2px);
+}
+
+.inventory-editor{
+    height:35vh;
+    width:max(500px, 30vw);
+    border-radius:16px;
+    padding:16px;
+}

@@ -1,15 +1,24 @@
-import { Grid2, Typography } from "@mui/material";
+import { Button, Grid2, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { IInventory } from "../../types/types";
 import { FormControl } from "../formControl/formControl.component";
+import './inventoryEditor.styles.css';
 
 export interface IInventoryEditor{
-    selectedProduct: IInventory
+    selectedProduct: IInventory;
+    closeModal: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProduct}){
+export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProduct, closeModal}){
 
-    const [formControl, setFormControl] = useState({...selectedProduct});
+    const [formControl, setFormControl] = useState({
+        id: selectedProduct.id,
+        category: selectedProduct.category,
+        name: selectedProduct.name,
+        price: selectedProduct.price.slice(1),
+        quantity: selectedProduct.quantity,
+        value: selectedProduct.value.slice(1)
+    });
 
     const onCategoryChange:React.ChangeEventHandler<HTMLInputElement> = e => {
         setFormControl(prevState=>({
@@ -39,14 +48,20 @@ export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProd
         }));
     }
 
-    return <Grid2>
-        <Typography variant="h3">Edit Product</Typography>
-        <Typography variant="body1"></Typography>
-        <Grid2 container>
-            <FormControl label="Category" value={formControl.category} onChange={onCategoryChange} id="category"/>
-            <FormControl label="Price" value={formControl.price.slice(1)} onChange={onPriceChange} id="price"/>
-            <FormControl label="Quantity" value={formControl.quantity} onChange={onQuantityChange} id="quantity"/>
-            <FormControl label="Value" value={formControl.value.slice(1)} onChange={onValueChange} id="value"/>
+    return <div className="inventory-editor-container" onClick={closeModal}>
+        <Grid2 className="inventory-editor" sx={{backgroundColor:'grey.800'}} onClick={e=>e.stopPropagation()}>
+            <Typography variant="h3" color="grey.300" mt="8px">Edit Product</Typography>
+            <Typography variant="body1" color="grey.300">{formControl.name}</Typography>
+            <Grid2 container gap={2} sx={{marginTop:'24px'}}>
+                <FormControl label="Category" value={formControl.category} onChange={onCategoryChange} id="category"/>
+                <FormControl label="Price" value={formControl.price} onChange={onPriceChange} id="price"/>
+                <FormControl label="Quantity" value={formControl.quantity} onChange={onQuantityChange} id="quantity"/>
+                <FormControl label="Value" value={formControl.value} onChange={onValueChange} id="value"/>
+            </Grid2>
+            <Grid2 container mt="32px" justifyContent="flex-end" gap={2}>
+                <Button variant="text" sx={{color:'success.primary'}}>Cancel</Button>
+                <Button variant="contained">Save</Button>
+            </Grid2>
         </Grid2>
-    </Grid2>
+    </div>
 }

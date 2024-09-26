@@ -18,7 +18,8 @@ const initialState:IInventoryStore = {
 const fetchInventories = createAsyncThunk("[Inventory FetchInventories]", async (_, thunkApi:any) => {
    const inventoryService = new InventoryService();
    const inventories:any = await inventoryService.getInventory();
-   return await inventories.json();
+   const res = await inventories.json();
+   return res.map((product:IInventory)=>({...product, id: Math.random().toString().slice(8)}));
 });
 
 export const postSlice = createSlice({

@@ -15,4 +15,26 @@ export class InventorySelector{
     static Loading(root:RootState){
         return root.inventory.loading;
     }
+
+    static totalProducts(root:RootState){
+        return root.inventory.inventories.reduce((acc, item)=>acc+item.quantity, 0);
+    }
+
+    static totalStoreValue(root:RootState){
+        return root.inventory.inventories.reduce((acc, item)=>{
+            const price = Number(item.price.slice(1));
+            return isNaN(price)? acc : acc + price;
+        }, 0);
+    }
+
+    static OutOfStock(root:RootState){
+        return root.inventory.inventories.filter(item=>item.quantity===0).length;
+    }
+
+    static NumCategories(root:RootState){
+        return root.inventory.inventories.reduce((acc, item)=>{
+            acc.add(item.category);
+            return acc;
+        }, new Set<string>()).size;
+    }
 }

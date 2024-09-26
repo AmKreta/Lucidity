@@ -6,7 +6,7 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 interface IDashboardCard{
     Icon:OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; };
     title:string;
-    value: string;
+    value: string | number;
 }
 
 export const DashboardCard:React.FC<IDashboardCard> =  function DashboardCard({Icon, title, value}){

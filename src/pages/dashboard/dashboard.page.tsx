@@ -16,6 +16,11 @@ export default function Dashboard(){
     const inventories = useAppSelector(InventorySelector.Inventories);
     const inventoryErrorMessage = useAppSelector(InventorySelector.ErrorMessage);
     const inventoriesLoading = useAppSelector(InventorySelector.Loading);
+    const inventoryTotalProducts = useAppSelector(InventorySelector.totalProducts);
+    const inventoryStoreValue = useAppSelector(InventorySelector.totalStoreValue);
+    const inventoryTotalOutOfStock = useAppSelector(InventorySelector.OutOfStock);
+    const inventoryNumCategories = useAppSelector(InventorySelector.NumCategories);
+
     const dispatch = useAppDispatch();
 
     useEffect(function(){
@@ -36,10 +41,10 @@ export default function Dashboard(){
     return <Container maxWidth="lg" sx={{height:'100%', backgroundColor:'grey.900'}}>
         <Typography variant="h3" color="grey.300" sx={{paddingTop:'16px'}}>Inventory Stats</Typography>
         <Grid container spacing={2} alignItems="center" justifyContent="flex-start" py='16px'>
-            <DashboardCard title="Total products" Icon={ShoppingCartIcon} value="30000"/>
-            <DashboardCard title="Total store value" Icon={CurrencyExchangeIcon} value="30000"/>
-            <DashboardCard title="Out of stock" Icon={RemoveShoppingCartIcon} value="100"/>
-            <DashboardCard title="No of Categories" Icon={CategoryIcon} value="3000"/>
+            <DashboardCard title="Total products" Icon={ShoppingCartIcon} value={inventoryTotalProducts}/>
+            <DashboardCard title="Total store value" Icon={CurrencyExchangeIcon} value={inventoryStoreValue}/>
+            <DashboardCard title="Out of stock" Icon={RemoveShoppingCartIcon} value={inventoryTotalOutOfStock}/>
+            <DashboardCard title="No of Categories" Icon={CategoryIcon} value={inventoryNumCategories}/>
         </Grid>
     </Container>;
 }

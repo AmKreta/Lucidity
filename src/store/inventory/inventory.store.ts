@@ -35,6 +35,11 @@ export const postSlice = createSlice({
                 value:`$${newInventory.value}`,
                 price: `$${newInventory.price}`
             };
+        },
+        deleteInventory(state, action:PayloadAction<IInventory['id']>){
+            const id = action.payload;
+            const indexInventory = state.inventories.findIndex(inventory=>inventory.id===id);
+            state.inventories.splice(indexInventory, 1);
         }
     },
     extraReducers(builder){

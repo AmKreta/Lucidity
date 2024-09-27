@@ -9,6 +9,8 @@ import { useTheme } from "@emotion/react";
 import { Modal, Stack, Typography } from "@mui/material";
 import {InventoryEditor} from '../inventoryEditor/inventoryEditor.component';
 import './inventoryGrid.styles.css';
+import { useDispatch } from "react-redux";
+import { InventoryActions } from "../../store/inventory/inventory.store";
 
 interface IInventoryGrid {
     inventories: IInventory[]
@@ -16,6 +18,7 @@ interface IInventoryGrid {
 
 export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }) {
     const theme:any= useTheme();
+    const dispatch = useDispatch();
     const [disabledProducts, setDisabledProducts] = useState(new Set<IInventory['id']>());
     const [activeProductModal, setActiveProductModal] = useState<null | IInventory>(null);
 
@@ -35,8 +38,8 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
         setActiveProductModal(null);
     }
 
-    function onDelete(){
-
+    function onDelete(id:string){
+        dispatch(InventoryActions.deleteInventory(id))
     }
     
     return <table className="inventoryGrid" style={{backgroundColor:theme.palette.grey['800']}}>
@@ -76,7 +79,7 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
                                     ? <VisibilityOffIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/>
                                     : <RemoveRedEyeIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/> 
                             }
-                            <DeleteIcon sx={{color:'error.dark'}} className={`${disabledProducts.has(inventory.id)? 'disabled': ''}`} />
+                            <DeleteIcon sx={{color:'error.dark'}} className={`${disabledProducts.has(inventory.id)? 'disabled': ''}`} onClick={()=>onDelete(inventory.id)}/>
                         </Stack>
                     </td>
                 </tr>)

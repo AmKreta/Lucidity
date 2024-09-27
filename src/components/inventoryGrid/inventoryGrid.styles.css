@@ -16,6 +16,11 @@ table.inventoryGrid{
         padding:16px;
         text-align:left
     }
+    
+    tr.row-disabled .MuiTypography-root{
+        color:#8e8e8e !important;
+    }
+
 }
 
 .grid-actions:hover{

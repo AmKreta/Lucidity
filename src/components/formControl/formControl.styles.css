@@ -13,5 +13,9 @@
         outline:none;
         padding:8px;
         width:100%;
+
+        .invalid{
+            border:1px solid red;
+        }
     }
 }   

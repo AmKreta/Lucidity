@@ -59,7 +59,7 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
         </thead>
         <tbody>
             {
-                inventories.map((inventory) => <tr key={inventory.id} style={{borderBottom:`.5px solid ${theme.palette.grey['600']}`}}>
+                inventories.map((inventory) => <tr key={inventory.id} style={{borderBottom:`.5px solid ${theme.palette.grey['600']}`}} className={`${disabledIncentoryIdSet.has(inventory.id) ? 'row-disabled':''}`}>
                     {
                         ["name", "category", "price", "quantity", "value"].map((key, index) => <td key={index}>
                             <Typography variant="body2" sx={{color: 'grey.300'}}>

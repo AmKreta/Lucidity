@@ -15,7 +15,7 @@ const initialState:IInventoryStore = {
     inventories: []
 }
 
-const fetchInventories = createAsyncThunk("[Inventory FetchInventories]", async (_, thunkApi:any) => {
+const fetchInventories = createAsyncThunk("[Inventory FetchInventories]", async () => {
    const inventoryService = new InventoryService();
    const inventories:any = await inventoryService.getInventory();
    const res = await inventories.json();

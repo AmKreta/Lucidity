@@ -66,9 +66,9 @@ export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProd
         closeModal(null as any);
     }
 
-    return <div className="inventory-editor-container" onClick={closeModal}>
+    return <div className="inventory-editor-container">
         <Grid2 className="inventory-editor" sx={{backgroundColor:'grey.800', position:'relative', borderRadius:'16px'}} onClick={e=>e.stopPropagation()}>
-            <Button sx={{position:'absolute', top:0, right:0, margin:'8px', minWidth:0, padding:'4px 16px', width:'20px', backgroundColor:'grey.900'}} variant="contained" disableElevation>
+            <Button sx={{position:'absolute', top:0, right:0, margin:'8px', minWidth:0, padding:'4px 16px', width:'20px', backgroundColor:'grey.900'}} variant="contained" disableElevation onClick={closeModal}>
                 <CloseIcon />
             </Button>
             <Typography variant="h3" color="grey.300" mt="8px">Edit Product</Typography>

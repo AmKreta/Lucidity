@@ -14,4 +14,5 @@ export interface IInventory<CURRENCY extends string = '$'>{
     quantity: number;
     price: Currency<CURRENCY>;
     id:string;
+    disabled?:boolean;
 }

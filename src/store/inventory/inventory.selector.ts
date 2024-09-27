@@ -16,6 +16,14 @@ export class InventorySelector{
         return root.inventory.loading;
     }
 
+    static DisabledInventoryIdSet(root:RootState){
+        const disabledIds = root.inventory.inventories.reduce((acc:string[],inventory)=>{
+            inventory.disabled && acc.push(inventory.id);
+            return acc;
+        },[]);
+        return new Set(disabledIds);
+    }
+
     static totalProducts(root:RootState){
         return root.inventory.inventories.reduce((acc, item)=>acc+item.quantity, 0);
     }

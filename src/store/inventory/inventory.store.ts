@@ -40,6 +40,11 @@ export const postSlice = createSlice({
             const id = action.payload;
             const indexInventory = state.inventories.findIndex(inventory=>inventory.id===id);
             state.inventories.splice(indexInventory, 1);
+        },
+        toggleInventoryDisable(state, action:PayloadAction<IInventory['id']>){
+            const id = action.payload;
+            const indexInventory = state.inventories.findIndex(inventory=>inventory.id===id);
+            state.inventories[indexInventory].disabled = !state.inventories[indexInventory].disabled;
         }
     },
     extraReducers(builder){

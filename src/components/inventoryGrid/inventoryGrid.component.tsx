@@ -6,13 +6,15 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {Chip} from '../chip/chip.component';
 import { useTheme } from "@emotion/react";
-import { Modal, Stack, Typography } from "@mui/material";
 import {InventoryEditor} from '../inventoryEditor/inventoryEditor.component';
-import './inventoryGrid.styles.css';
 import { useDispatch } from "react-redux";
 import { InventoryActions } from "../../store/inventory/inventory.store";
 import { useAppSelector } from "../../hooks/store/store.hook";
 import { InventorySelector } from "../../store/inventory/inventory.selector";
+import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
+import Typography from "@mui/material/Typography";
+import './inventoryGrid.styles.css';
 
 interface IInventoryGrid {
     inventories: IInventory[]

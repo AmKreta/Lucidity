@@ -17,11 +17,11 @@ export const userSlice = createSlice({
     reducers:{
         changeUserRole(state, action:PayloadAction<USER_ROLES>){
             state.role = action.payload;
-        }
+        },
     }
 });
 
-export const InventoryActions = {
+export const UserActions = {
     ...userSlice.actions
 }
 

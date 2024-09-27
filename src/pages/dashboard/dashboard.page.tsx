@@ -14,6 +14,9 @@ import Switch from '@mui/material/Switch'
 import Stack from '@mui/material/Stack'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { InventoryGrid } from "../../components/inventoryGrid/inventoryGrid.component";
+import { UserSelector } from "../../store/user/user.selector";
+import { USER_ROLES } from "../../types/user-role.enum";
+import { UserActions } from "../../store/user/user.store";
 
 export default function Dashboard(){
 
@@ -24,6 +27,7 @@ export default function Dashboard(){
     const inventoryStoreValue = useAppSelector(InventorySelector.totalStoreValue);
     const inventoryTotalOutOfStock = useAppSelector(InventorySelector.OutOfStock);
     const inventoryNumCategories = useAppSelector(InventorySelector.NumCategories);
+    const currentUserRole = useAppSelector(UserSelector.UserRole);
 
     const dispatch = useAppDispatch();
 
@@ -39,11 +43,17 @@ export default function Dashboard(){
     //     return <div>{inventoriesLoading}</div>
     // }
 
+    function toggleUser(){
+        const newRole = currentUserRole === USER_ROLES.ADMIN
+            ? USER_ROLES.USER
+            : USER_ROLES.ADMIN;
+        dispatch(UserActions.changeUserRole(newRole));
+    }
 
     return <Container fixed sx={{height:'100%', minWidth:'100%', backgroundColor:'grey.900', position:'relative'}}>
         <Stack direction="row" spacing={1} alignItems="center" position="absolute" top={0} right={0} m='16px 32px'>
             <Typography color="grey.300" variant="body2">Admin</Typography>
-            <Switch color="success"/>
+            <Switch color="success" checked={currentUserRole===USER_ROLES.USER} onClick={toggleUser}/>
             <Typography color="grey.300" variant="body2">User</Typography>
             <ExitToAppIcon sx={{color: "grey.300"}}/>
         </Stack>

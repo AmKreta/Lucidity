@@ -17,6 +17,7 @@ import { InventoryGrid } from "../../components/inventoryGrid/inventoryGrid.comp
 import { UserSelector } from "../../store/user/user.selector";
 import { USER_ROLES } from "../../types/user-role.enum";
 import { UserActions } from "../../store/user/user.store";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Dashboard(){
 
@@ -32,16 +33,18 @@ export default function Dashboard(){
     const dispatch = useAppDispatch();
 
     useEffect(function(){
-        //dispatch(InventoryActions.fetchInventories() as any);
+        dispatch(InventoryActions.fetchInventories() as any);
     },[]);
 
-    // if(inventoryErrorMessage){
-    //     return <div>{inventoryErrorMessage}</div>
-    // }
+    if(inventoryErrorMessage){
+        return <Grid container alignItems="center" justifyContent="center" sx={{height:'100vh', width:'100vw'}}>{inventoryErrorMessage}</Grid>;
+    }
 
-    // if(inventoriesLoading){
-    //     return <div>{inventoriesLoading}</div>
-    // }
+    if(inventoriesLoading){
+        return <Grid container alignItems="center" justifyContent="center" sx={{height:'100vh', width:'100vw'}}>
+             <CircularProgress color="inherit" />
+        </Grid>;
+    }
 
     function toggleUser(){
         const newRole = currentUserRole === USER_ROLES.ADMIN

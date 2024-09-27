@@ -15,6 +15,8 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import Typography from "@mui/material/Typography";
 import './inventoryGrid.styles.css';
+import { UserSelector } from "../../store/user/user.selector";
+import { USER_ROLES } from "../../types/user-role.enum";
 
 interface IInventoryGrid {
     inventories: IInventory[]
@@ -24,6 +26,7 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
     const theme:any= useTheme();
     const dispatch = useDispatch();
     const disabledIncentoryIdSet = useAppSelector(InventorySelector.DisabledInventoryIdSet);
+    const currentUserRole = useAppSelector(UserSelector.UserRole);
     const [activeProductModal, setActiveProductModal] = useState<null | IInventory>(null);
 
     function toggleDisabledProducts(id:string){
@@ -36,6 +39,10 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
 
     function onDelete(id:string){
         dispatch(InventoryActions.deleteInventory(id))
+    }
+
+    function disableInventory(id:string){
+        return (currentUserRole === USER_ROLES.USER) || disabledIncentoryIdSet.has(id);
     }
     
     return <table className="inventoryGrid" style={{backgroundColor:theme.palette.grey['800']}}>
@@ -59,7 +66,7 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
         </thead>
         <tbody>
             {
-                inventories.map((inventory) => <tr key={inventory.id} style={{borderBottom:`.5px solid ${theme.palette.grey['600']}`}} className={`${disabledIncentoryIdSet.has(inventory.id) ? 'row-disabled':''}`}>
+                inventories.map((inventory) => <tr key={inventory.id} style={{borderBottom:`.5px solid ${theme.palette.grey['600']}`}} className={`${disableInventory(inventory.id) ? 'row-disabled':''}`}>
                     {
                         ["name", "category", "price", "quantity", "value"].map((key, index) => <td key={index}>
                             <Typography variant="body2" sx={{color: 'grey.300'}}>
@@ -69,13 +76,13 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
                     }
                     <td className="grid-actions">
                         <Stack direction="row" spacing={1}>
-                            <EditIcon sx={{color:'success.light'}} className={`${disabledIncentoryIdSet.has(inventory.id)? 'disabled': ''}`} onClick={()=>setActiveProductModal(inventory)}/> 
+                            <EditIcon sx={{color:'success.light'}} className={`${disableInventory(inventory.id)? 'disabled': ''}`} onClick={()=>setActiveProductModal(inventory)}/> 
                             {
-                                disabledIncentoryIdSet.has(inventory.id)
+                                disableInventory(inventory.id)
                                     ? <VisibilityOffIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/>
                                     : <RemoveRedEyeIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/> 
                             }
-                            <DeleteIcon sx={{color:'error.dark'}} className={`${disabledIncentoryIdSet.has(inventory.id)? 'disabled': ''}`} onClick={()=>onDelete(inventory.id)}/>
+                            <DeleteIcon sx={{color:'error.dark'}} className={`${disableInventory(inventory.id)? 'disabled': ''}`} onClick={()=>onDelete(inventory.id)}/>
                         </Stack>
                     </td>
                 </tr>)

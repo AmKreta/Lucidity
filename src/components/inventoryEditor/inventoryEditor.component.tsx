@@ -1,4 +1,6 @@
-import { Button, Grid2, IconButton, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid2 from "@mui/material/Grid2";
+import Typography from "@mui/material/Typography";
 import React, { Ref, useEffect, useRef, useState } from "react";
 import { IInventory } from "../../types/types";
 import { FormControl } from "../formControl/formControl.component";

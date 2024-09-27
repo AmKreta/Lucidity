@@ -1,6 +1,8 @@
 import React from "react";
 import './dashboardCard.stylles.css';
-import { Card, SvgIconTypeMap, Typography } from "@mui/material";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
+import { SvgIconTypeMap } from "@mui/material/SvgIcon";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
 interface IDashboardCard{

@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from "react";
 import './formControl.styles.css';
 import { useTheme } from "@emotion/react";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 export interface IFormControl{
     label: string;

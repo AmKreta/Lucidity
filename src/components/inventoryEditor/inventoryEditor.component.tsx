@@ -3,15 +3,17 @@ import React, { useState } from "react";
 import { IInventory } from "../../types/types";
 import { FormControl } from "../formControl/formControl.component";
 import './inventoryEditor.styles.css';
+import { useAppDispatch } from "../../hooks/store/store.hook";
+import { InventoryActions } from "../../store/inventory/inventory.store";
 
 export interface IInventoryEditor{
     selectedProduct: IInventory;
-    closeModal: React.MouseEventHandler<HTMLDivElement>;
+    closeModal: React.MouseEventHandler<HTMLElement>;
 }
 
 export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProduct, closeModal}){
 
-    const [formControl, setFormControl] = useState({
+    const [formControl, setFormControl] = useState<IInventory<''>>({
         id: selectedProduct.id,
         category: selectedProduct.category,
         name: selectedProduct.name,
@@ -19,6 +21,8 @@ export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProd
         quantity: selectedProduct.quantity,
         value: selectedProduct.value.slice(1)
     });
+
+    const dispatch = useAppDispatch();
 
     const onCategoryChange:React.ChangeEventHandler<HTMLInputElement> = e => {
         setFormControl(prevState=>({
@@ -48,6 +52,11 @@ export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProd
         }));
     }
 
+    const onSave = ()=>{
+        dispatch(InventoryActions.updateInventory(formControl));
+        closeModal(null as any);
+    }
+
     return <div className="inventory-editor-container" onClick={closeModal}>
         <Grid2 className="inventory-editor" sx={{backgroundColor:'grey.800'}} onClick={e=>e.stopPropagation()}>
             <Typography variant="h3" color="grey.300" mt="8px">Edit Product</Typography>
@@ -59,8 +68,8 @@ export const InventoryEditor:React.FC<IInventoryEditor> = function({selectedProd
                 <FormControl label="Value" value={formControl.value} onChange={onValueChange} id="value"/>
             </Grid2>
             <Grid2 container mt="32px" justifyContent="flex-end" gap={2}>
-                <Button variant="text" sx={{color:'success.primary'}}>Cancel</Button>
-                <Button variant="contained">Save</Button>
+                <Button variant="text" sx={{color:'success.primary'}} onClick={closeModal}>Cancel</Button>
+                <Button variant="contained" onClick={onSave}>Save</Button>
             </Grid2>
         </Grid2>
     </div>

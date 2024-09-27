@@ -26,12 +26,16 @@ export const postSlice = createSlice({
     name:'Inventories',
     initialState,
     reducers:{
-        // createPost:(state, action:PayloadAction<IPost>)=>{
-        //     const id = Math.random().toString().slice(10);
-        //     const post = action.payload;
-        //     post.id = id;
-        //     state.posts.unshift(post)
-        // }
+        updateInventory(state, action:PayloadAction<IInventory<''>>){
+            const newInventory = action.payload;
+            const id = action.payload.id;
+            const indexOldInventory = state.inventories.findIndex(inventory=>inventory.id===id);
+            state.inventories[indexOldInventory] = {
+                ...newInventory,
+                value:`$${newInventory.value}`,
+                price: `$${newInventory.price}`
+            };
+        }
     },
     extraReducers(builder){
         builder.addCase(fetchInventories.pending, (state) => {

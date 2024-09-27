@@ -62,22 +62,22 @@ export const InventoryGrid: React.FC<IInventoryGrid> = function ({ inventories }
             {
                 inventories.map((inventory) => <tr key={inventory.id} style={{borderBottom:`.5px solid ${theme.palette.grey['600']}`}}>
                     {
-                        Object.keys(inventory).map((key, index) => <td key={index}>
+                        ["name", "category", "price", "quantity", "value"].map((key, index) => <td key={index}>
                             <Typography variant="body2" sx={{color: 'grey.300'}}>
                                 {(inventory as any)[key]}
                             </Typography>
                         </td>)
                     }
                     <td className="grid-actions">
-                    <Stack direction="row" spacing={1}>
-                        <EditIcon sx={{color:'success.light'}} className={`${disabledProducts.has(inventory.id)? 'disabled': ''}`} onClick={()=>setActiveProductModal(inventory)}/> 
-                        {
-                            disabledProducts.has(inventory.id)
-                                ? <VisibilityOffIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/>
-                                : <RemoveRedEyeIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/> 
-                        }
-                        <DeleteIcon sx={{color:'error.dark'}} className={`${disabledProducts.has(inventory.id)? 'disabled': ''}`} />
-                    </Stack>
+                        <Stack direction="row" spacing={1}>
+                            <EditIcon sx={{color:'success.light'}} className={`${disabledProducts.has(inventory.id)? 'disabled': ''}`} onClick={()=>setActiveProductModal(inventory)}/> 
+                            {
+                                disabledProducts.has(inventory.id)
+                                    ? <VisibilityOffIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/>
+                                    : <RemoveRedEyeIcon sx={{color:'info.dark'}} onClick={()=>toggleDisabledProducts(inventory.id)}/> 
+                            }
+                            <DeleteIcon sx={{color:'error.dark'}} className={`${disabledProducts.has(inventory.id)? 'disabled': ''}`} />
+                        </Stack>
                     </td>
                 </tr>)
             }

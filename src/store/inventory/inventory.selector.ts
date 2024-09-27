@@ -30,8 +30,9 @@ export class InventorySelector{
 
     static totalStoreValue(root:RootState){
         return root.inventory.inventories.reduce((acc, item)=>{
-            const price = Number(item.price.slice(1));
-            return isNaN(price)? acc : acc + price;
+            const value = Number(item.value.slice(1));
+            console.log({value})
+            return isNaN(value)? acc : acc + value;
         }, 0);
     }
 

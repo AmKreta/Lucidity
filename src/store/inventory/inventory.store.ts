@@ -33,7 +33,8 @@ export const postSlice = createSlice({
             state.inventories[indexOldInventory] = {
                 ...newInventory,
                 value:`$${newInventory.value}`,
-                price: `$${newInventory.price}`
+                price: `$${newInventory.price}`,
+                quantity: Number(newInventory.quantity),
             };
         },
         deleteInventory(state, action:PayloadAction<IInventory['id']>){
